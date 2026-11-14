@@ -1,0 +1,6 @@
+(venv311) PS F:\Hemlata Thesis\Code> 
+
+
+.\venv311\Scripts\Activate.ps1 
+or
+ venv311\Scripts\activate
