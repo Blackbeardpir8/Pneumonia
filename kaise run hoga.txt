@@ -4,3 +4,27 @@
 .\venv311\Scripts\Activate.ps1 
 or
  venv311\Scripts\activate
+
+
+ backend k liye -  #(venv311) F:\Hemlata Thesis\Code\pneumonia_backend>
+
+
+
+
+
+
+
+
+
+
+ # postman m kaise run hooga 
+ CDSS Image Prediction
+POST
+
+http://127.0.0.1:8000/api/v1/cdss/predict/
+
+Body
+- Select form-data
+- Key: image
+- Change type from Text to File
+- Select a chest X-ray image, preferably covid_1579.png.

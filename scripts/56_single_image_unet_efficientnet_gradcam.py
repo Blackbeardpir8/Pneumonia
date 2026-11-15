@@ -43,6 +43,16 @@ UNET_PATH = (
     / "unet_lung_segmentation_covid_finetuned_best.keras"
 )
 
+INFECTION_UNET_PATH = (
+    PROJECT_ROOT
+    / "saved_models"
+    / "infection_loss_experiments"
+    / "weighted_bce_dice"
+    / "best_model.keras"
+)
+INFECTION_IMAGE_SIZE = 256
+INFECTION_THRESHOLD = 0.50
+
 
 OUTPUT_ROOT = PROJECT_ROOT / "results" / "classification" / "single_image_inference"
 
@@ -87,6 +97,28 @@ def load_grayscale_image(image_path: Path) -> np.ndarray:
     )
     # U-Net expects grayscale normalized to 0..1.
     return (tf.cast(image, tf.float32) / 255.0).numpy()
+
+
+def load_infection_image(image_path: Path) -> np.ndarray:
+    """
+    Infection U-Net preprocessing:
+    grayscale, 256x256, normalized to 0..1.
+    """
+    image_bytes = tf.io.read_file(str(image_path))
+    image = tf.io.decode_image(
+        image_bytes,
+        channels=1,
+        expand_animations=False,
+    )
+    image.set_shape([None, None, 1])
+    image = tf.image.resize(
+        image,
+        [INFECTION_IMAGE_SIZE, INFECTION_IMAGE_SIZE],
+        method="bilinear",
+    )
+    return (
+        tf.cast(image, tf.float32) / 255.0
+    ).numpy()
 
 
 def choose_class(probabilities: np.ndarray):
@@ -272,6 +304,57 @@ def save_visualizations(
     )
 
 
+def save_infection_visualizations(
+    image_rgb,
+    infection_mask,
+    output_dir,
+):
+    """
+    Save infection mask and overlay.
+    The mask is generated at 256x256.
+    It is resized to 224x224 only for visualization.
+    """
+    # Save original 256x256 binary infection mask.
+    infection_mask_uint8 = infection_mask.astype(np.uint8)
+    plt.imsave(
+        output_dir / "infection_mask.png",
+        infection_mask_uint8,
+        cmap="gray",
+        vmin=0,
+        vmax=1,
+    )
+
+    # Resize mask for overlay with existing 224x224 display image.
+    display_mask = tf.image.resize(
+        infection_mask_uint8[..., np.newaxis].astype(np.float32),
+        [IMAGE_SIZE, IMAGE_SIZE],
+        method="nearest",
+    ).numpy()[..., 0] > 0.5
+
+    image_display = np.clip(
+        image_rgb / 255.0,
+        0.0,
+        1.0,
+    )
+
+    # Red overlay visualization of predicted infection mask.
+    infection_overlay = image_display.copy()
+    tint = np.zeros_like(infection_overlay)
+    tint[..., 0] = 1.0  # red channel
+    infection_overlay[display_mask] = (
+        0.55 * infection_overlay[display_mask]
+        + 0.45 * tint[display_mask]
+    )
+
+    fig, ax = plt.subplots(figsize=(6, 6))
+    ax.imshow(infection_overlay)
+    ax.set_title("Infection U-Net mask overlay (experimental)")
+    ax.axis("off")
+    fig.tight_layout()
+    fig.savefig(output_dir / "infection_overlay.png", dpi=180, bbox_inches="tight")
+    plt.close(fig)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Run U-Net + EfficientNetB0 inference on one chest X-ray."
@@ -293,6 +376,11 @@ def main():
         raise FileNotFoundError(f"Classifier checkpoint not found: {CLASSIFIER_PATH}")
     if not UNET_PATH.is_file():
         raise FileNotFoundError(f"U-Net checkpoint not found: {UNET_PATH}")
+    if not INFECTION_UNET_PATH.is_file():
+        raise FileNotFoundError(
+            f"Infection U-Net checkpoint not found: "
+            f"{INFECTION_UNET_PATH}"
+        )
 
     output_dir = OUTPUT_ROOT / image_path.stem
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -304,9 +392,16 @@ def main():
     print("Loading COVID-domain fine-tuned U-Net...")
     unet = tf.keras.models.load_model(UNET_PATH, compile=False)
 
+    print("Loading Weighted BCE + Dice infection U-Net...")
+    infection_unet = tf.keras.models.load_model(
+        INFECTION_UNET_PATH,
+        compile=False,
+    )
+
     print("Preprocessing image...")
     rgb_image = load_rgb_image(image_path)
     gray_image = load_grayscale_image(image_path)
+    infection_image = load_infection_image(image_path)
 
     rgb_batch = np.expand_dims(rgb_image, axis=0).astype(np.float32)
     gray_batch = np.expand_dims(gray_image, axis=0).astype(np.float32)
@@ -318,6 +413,39 @@ def main():
             f"Unexpected U-Net output shape: {mask_probabilities.shape}"
         )
     lung_mask = mask_probabilities[0, ..., 0] >= LUNG_THRESHOLD
+
+    print("Running infection segmentation...")
+    infection_batch = np.expand_dims(
+        infection_image,
+        axis=0,
+    ).astype(np.float32)
+    infection_probabilities = infection_unet(
+        infection_batch,
+        training=False,
+    ).numpy()
+    if (
+        infection_probabilities.ndim != 4
+        or infection_probabilities.shape[-1] < 1
+    ):
+        raise ValueError(
+            "Unexpected infection U-Net output shape: "
+            f"{infection_probabilities.shape}"
+        )
+    infection_mask = (
+        infection_probabilities[0, ..., 0]
+        >= INFECTION_THRESHOLD
+    )
+    infection_mask_area_pixels = int(
+        np.sum(infection_mask)
+    )
+    infection_mask_area_percent_of_model_input = float(
+        np.mean(infection_mask) * 100
+    )
+    save_infection_visualizations(
+        rgb_image,
+        infection_mask,
+        output_dir,
+    )
 
     print("Running pneumonia classification...")
     probabilities = classifier(rgb_batch, training=False).numpy()[0]
@@ -362,6 +490,14 @@ def main():
         "input_image": str(image_path),
         "classifier_checkpoint": str(CLASSIFIER_PATH),
         "unet_checkpoint": str(UNET_PATH),
+        "infection_segmentation_checkpoint": str(INFECTION_UNET_PATH),
+        "infection_segmentation_threshold": INFECTION_THRESHOLD,
+        "infection_mask_area_pixels": infection_mask_area_pixels,
+        "infection_mask_area_percent_of_model_input": (
+            infection_mask_area_percent_of_model_input
+        ),
+        "infection_mask_path": str(output_dir / "infection_mask.png"),
+        "infection_overlay_path": str(output_dir / "infection_overlay.png"),
         "class_probabilities_percent": {
             name: float(probabilities[index] * 100)
             for index, name in enumerate(CLASS_NAMES)
@@ -377,6 +513,8 @@ def main():
             "Grad-CAM represents model attention, not a validated infection mask.",
             "No infection percentage or severity stage is calculated by this script.",
             "This research prototype is not a standalone clinical diagnosis.",
+            "The infection mask is an experimental model prediction, not a clinically validated lesion annotation.",
+            "The predicted mask area is not a clinically validated infection percentage or severity score.",
         ],
         "output_directory": str(output_dir),
     }
@@ -395,6 +533,10 @@ def main():
     print(
         "Lung mask area (% of full image): "
         f"{attention_metrics['lung_mask_area_percent_of_image']:.2f}%"
+    )
+    print(
+        "Infection mask area (% of 256x256 input): "
+        f"{infection_mask_area_percent_of_model_input:.2f}%"
     )
     print(
         "Grad-CAM activation inside lung (%): "
