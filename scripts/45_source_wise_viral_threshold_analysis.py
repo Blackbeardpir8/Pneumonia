@@ -202,3 +202,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# to run this script, use the following command:
+# python scripts/45_source_wise_viral_threshold_analysis.py

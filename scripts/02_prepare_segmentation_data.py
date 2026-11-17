@@ -342,3 +342,4 @@ if __name__ == "__main__":
 
 
 # to run  python scripts/02_prepare_segmentation_data.py
+# python scripts/02_prepare_segmentation_data.py

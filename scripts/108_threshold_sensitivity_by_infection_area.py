@@ -644,3 +644,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# # to run this script, use the following command:
+# python scripts/108_threshold_sensitivity_by_infection_area.py

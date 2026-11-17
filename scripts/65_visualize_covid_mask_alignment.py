@@ -68,3 +68,6 @@ for class_name, filename in SAMPLES.items():
     print("Saved:", output_file)
 
 print("\nVisual alignment samples generated.")
+
+# to run this script, use the following command:
+# python scripts/65_visualize_covid_mask_alignment.py

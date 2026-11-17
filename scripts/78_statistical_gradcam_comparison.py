@@ -624,3 +624,6 @@ print(
 )
 
 print("\nAnalysis completed.")
+
+# to run this script, use the following command:
+# python scripts/78_statistical_gradcam_comparison.py

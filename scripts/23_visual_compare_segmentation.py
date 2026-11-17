@@ -295,4 +295,5 @@ print("\nVisual comparison completed.")
 print("Output directory:", OUTPUT_DIR)
 
 
-# to run 
+# to run script, use the following command:
+# python scripts/23_visual_compare_segmentation.py

@@ -128,4 +128,5 @@ def main():
 if __name__ == "__main__":
     main()
 
-# to run 
+# to run script, use the following command:
+# python scripts/09_inspect_worst_segmentation.py

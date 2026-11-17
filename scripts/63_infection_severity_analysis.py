@@ -987,3 +987,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# to run this script, use the following command:
+# python scripts/63_infection_severity_analysis.py <path_to_chest_xray_image

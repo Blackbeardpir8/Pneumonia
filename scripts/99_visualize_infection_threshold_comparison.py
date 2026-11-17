@@ -561,3 +561,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# to run this script, use the following command:
+# python scripts/99_visualize_infection_threshold_comparison.py

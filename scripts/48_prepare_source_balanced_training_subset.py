@@ -180,3 +180,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# to run this script, use the following command:
+# python scripts/48_prepare_source_balanced_training_subset.py

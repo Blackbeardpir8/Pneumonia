@@ -58,3 +58,6 @@ output = CSV_PATH.parent / "infection_mask_statistics.csv"
 summary.to_csv(output)
 
 print("\nStatistics saved:", output)
+
+# to run this script, use the following command:
+# python scripts/84_analyze_infection_mask_statistics.py

@@ -92,3 +92,6 @@ output_path = OUTPUT / "infection_lung_overlap_audit.csv"
 df.to_csv(output_path, index=False)
 
 print("\nSaved:", output_path)
+
+# to run this script, use the following command:
+# python scripts/87_analyze_infection_lung_overlap.py

@@ -164,4 +164,5 @@ if __name__ == "__main__":
     main()
 
 
-# to run this script: python scripts/07_compare_segmentation_thresholds.py
+# to run this script: 
+# python scripts/07_compare_segmentation_thresholds.py

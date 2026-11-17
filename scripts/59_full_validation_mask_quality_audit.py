@@ -324,3 +324,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# to run this script, use the following command:    
+# python scripts/59_full_validation_mask_quality_audit.py

@@ -178,3 +178,5 @@ if __name__ == "__main__":
 
 
 
+# to run this script, use the following command:
+# python scripts/54_sourcewise_threshold_multiclass_analysis.py

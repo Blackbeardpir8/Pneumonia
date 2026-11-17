@@ -501,3 +501,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# to run this script, use the following command:
+# python scripts/31_compare_failed_and_successful_unet_predictions.py

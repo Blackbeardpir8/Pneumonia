@@ -45,4 +45,5 @@ for split in ["train", "val"]:
 
 
 
-# to run 
+# to run script, use the following command:
+# python scripts/18_check_mask_components.py

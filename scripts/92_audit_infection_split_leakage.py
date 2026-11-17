@@ -102,3 +102,6 @@ output_path = OUTPUT / "infection_split_duplicate_audit.csv"
 df.to_csv(output_path, index=False)
 
 print("\nSaved:", output_path)
+
+# to run this script, use the following command:
+# python scripts/92_audit_infection_split_leakage.py

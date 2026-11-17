@@ -43,4 +43,5 @@ print(
 print("\nTotal images:", len(stats))
 
 
-# to run 
+# to run script, use the following command:
+# python scripts/12_compare_dataset_image_statistics.py

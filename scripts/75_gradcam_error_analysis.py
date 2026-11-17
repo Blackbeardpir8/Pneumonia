@@ -654,3 +654,6 @@ print("Images processed:", len(statistics_df))
 print("Output directory:", OUTPUT_DIR)
 print("\nAttention statistics:")
 print(statistics_df.to_string(index=False))
+
+# to run this script, use the following command:
+# python scripts/75_gradcam_error_analysis.py

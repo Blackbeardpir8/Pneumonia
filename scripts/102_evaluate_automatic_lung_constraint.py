@@ -886,3 +886,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# to run this script, use the following command:
+# python scripts/102_evaluate_automatic_lung_constraint.py

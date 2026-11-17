@@ -85,3 +85,6 @@ output_path = OUTPUT / "identical_mask_investigation.csv"
 result.to_csv(output_path, index=False)
 
 print("\nSaved:", output_path)
+
+# to run this script, use the following command:
+# python scripts/91_investigate_identical_masks.py

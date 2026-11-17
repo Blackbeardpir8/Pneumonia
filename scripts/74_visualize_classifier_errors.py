@@ -272,3 +272,6 @@ print(f"Correct Viral: {len(correct_viral)}")
 
 print("\nOutput directory:")
 print(OUTPUT_DIR)
+
+## to run this script, use the following command:
+# python scripts/74_visualize_classifier_errors.py

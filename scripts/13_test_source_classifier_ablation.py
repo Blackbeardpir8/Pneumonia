@@ -708,3 +708,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# to run script, use the following command:
+# python scripts/13_test_source_classifier_ablation.py

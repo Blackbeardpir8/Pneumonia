@@ -356,3 +356,6 @@ print("3. statistical_comparison_summary.json")
 print("\nIMPORTANT:")
 print("This is a paired comparison of the existing test predictions.")
 print("No model training or threshold tuning was performed.")
+
+# # to run this script, use the following command:
+# python scripts/115_statistical_comparison_infection_models.py

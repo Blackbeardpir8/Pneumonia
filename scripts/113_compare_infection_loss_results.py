@@ -370,3 +370,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# # to run this script, use the following command:
+# python scripts/113_compare_infection_loss_results.py

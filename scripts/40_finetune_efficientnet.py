@@ -608,3 +608,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# to run this script, use the following command:
+# python scripts/40_finetune_efficientnet.py

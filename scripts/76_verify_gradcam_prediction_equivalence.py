@@ -419,3 +419,6 @@ print(output_csv)
 
 print("\nVerification completed.")
 
+
+# to run this script, use the following command:
+# python scripts/76_verify_gradcam_prediction_equivalence.py

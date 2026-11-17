@@ -33,3 +33,6 @@ for class_name, mask_dir in MASK_DIRS.items():
             f"Foreground percentage: "
             f"{foreground_pixels / total_pixels * 100:.2f}%"
         )
+
+# to run this script, use the following command:
+# python scripts/81_inspect_covid_masks.py

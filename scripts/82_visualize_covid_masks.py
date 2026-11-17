@@ -64,3 +64,7 @@ plt.close()
 
 print("Visualization generated successfully.")
 print(f"Saved at: {output_path}")
+
+
+# to run this script, use the following command:
+# python scripts/82_visualize_covid_masks.py

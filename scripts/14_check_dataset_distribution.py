@@ -27,4 +27,5 @@ for split in ["train", "val"]:
 
     print(f"Total: {total}")
 
-# to run 
+# to run this script, use the following command:
+# python scripts/14_check_dataset_distribution.py

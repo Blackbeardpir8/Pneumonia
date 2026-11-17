@@ -586,3 +586,6 @@ print(
 )
 
 print("\nScript 80 completed successfully.")
+
+# to run this script, use the following command:
+# python scripts/80_generate_research_findings_report.py

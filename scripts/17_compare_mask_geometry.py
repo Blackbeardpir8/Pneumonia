@@ -71,4 +71,5 @@ if __name__ == "__main__":
     main()
 
 
-# to run 
+# to run script, use the following command:
+# python scripts/17_compare_mask_geometry.py

@@ -88,4 +88,5 @@ print(output_dir / "balanced_dice_history.png")
 print(output_dir / "balanced_loss_history.png")
 
 
-# to run 
+# to run script, use the following command:
+# python scripts/24_plot_balanced_training_history.py

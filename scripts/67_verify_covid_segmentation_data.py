@@ -35,3 +35,6 @@ for _, row in df.head(10).iterrows():
     )
 
 print("\nVerification completed.")
+
+# to run this script, use the following command:
+# python scripts/67_verify_covid_segmentation_data.py

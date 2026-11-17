@@ -183,4 +183,5 @@ if __name__ == "__main__":
     main()
 
 
-# to run 
+# to run script, use the following command:
+# python scripts/13_compare_dataset_predictions.py

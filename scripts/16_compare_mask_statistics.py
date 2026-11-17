@@ -37,4 +37,5 @@ for split in ["train", "val"]:
     print("Total masks:", len(df))
 
 
-# to run 
+# to run run this script, use the following command:
+# python scripts/16_compare_mask_statistics.py

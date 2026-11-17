@@ -381,4 +381,5 @@ if __name__ == "__main__":
     main()
 
 
-# to run this python scripts/03_train_segmentation_model.py
+# to run this code, use the following command:
+# python scripts/03_train_segmentation_model.py

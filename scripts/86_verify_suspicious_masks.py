@@ -55,3 +55,6 @@ for split, class_name, filename in SAMPLES:
             "Foreground percentage:",
             round(np.mean(array > 0) * 100, 4)
         )
+
+# to run this script, use the following command:
+# python scripts/86_verify_suspicious_masks.py

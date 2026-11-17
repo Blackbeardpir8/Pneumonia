@@ -255,3 +255,6 @@ print(
 print("\nManifest:", manifest_path)
 
 print("\nDataset preparation completed.")
+
+# to run this script, use the following command:
+# python scripts/66_prepare_covid_segmentation_data.py

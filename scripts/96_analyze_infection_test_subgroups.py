@@ -518,3 +518,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# to run this script, use the following command:
+# python scripts/96_analyze_infection_test_subgroups.py

@@ -238,3 +238,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# to run this script, use the following command:
+# python scripts/61_preprocessing_domain_audit.py

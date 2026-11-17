@@ -360,3 +360,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# to run this script, use the following command:
+# python scripts/20_source_wise_confusion_analysis.py

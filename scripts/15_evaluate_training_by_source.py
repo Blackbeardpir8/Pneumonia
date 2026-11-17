@@ -95,4 +95,5 @@ if __name__ == "__main__":
     main()
 
 
-# to run
+# to run this script, use the following command:
+# python scripts/15_evaluate_training_by_source.py

@@ -665,3 +665,5 @@ print("\nResults saved to:")
 print(OUTPUT_DIR)
 
 
+# # to run this script, use the following command:
+# python scripts/15_test_pneumonia_classifier_ablation.py

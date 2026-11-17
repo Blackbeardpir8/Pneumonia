@@ -195,4 +195,5 @@ print("\nVisualization completed.")
 print("Output directory:", OUTPUT_DIR)
 
 
-# to run  python scripts/04_visualize_segmentation_predictions.py
+# to run  command, use the following:
+# python scripts/04_visualize_segmentation_predictions.py

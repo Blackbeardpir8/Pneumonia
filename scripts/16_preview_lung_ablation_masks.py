@@ -139,3 +139,5 @@ print("\nPreview generation completed.")
 print("Output folder:", OUTPUT_DIR)
 
 
+# to run this script, use the following command:
+# python scripts/16_preview_lung_ablation_masks.py

@@ -905,3 +905,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# to run this script, use the following command:
+# python scripts/103_visualize_automatic_lung_constraint_errors.py

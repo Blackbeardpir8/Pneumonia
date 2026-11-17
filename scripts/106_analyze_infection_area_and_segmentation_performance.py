@@ -766,3 +766,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# # to run this script, use the following command:
+# python scripts/106_analyze_infection_area_and_segmentation_performance.py

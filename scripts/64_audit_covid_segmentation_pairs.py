@@ -110,3 +110,6 @@ with open(output_file, "w", newline="", encoding="utf-8") as file:
 print("\nAudit completed.")
 print("Report:", output_file)
 print("Total records:", len(rows))
+
+# to run this script, use the following command:
+# python scripts/64_audit_covid_segmentation_pairs.py

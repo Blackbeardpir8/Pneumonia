@@ -78,3 +78,6 @@ output_path = OUTPUT / "infection_area_quality_audit.csv"
 df.to_csv(output_path, index=False)
 
 print("\nSaved:", output_path)
+
+# to run this script, use the following command:
+# python scripts/88_analyze_infection_area_quality.py

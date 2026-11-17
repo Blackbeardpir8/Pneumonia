@@ -714,3 +714,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# to run this script, use the following command:
+# python scripts/100_compare_lung_constrained_segmentation.py

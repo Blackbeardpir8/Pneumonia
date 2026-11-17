@@ -73,3 +73,5 @@ print("Target output:", target.output.shape)
 print("\nInspection completed.")
 
 
+# to run this script, use the following command:
+# python scripts/75a_inspect_classifier_architecture.py

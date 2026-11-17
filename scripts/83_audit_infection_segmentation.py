@@ -121,3 +121,6 @@ print("CSV report:", report_path)
 if records:
     print("Empty infection masks:", sum(r["infection_mask_empty"] for r in records))
     print("Dimension mismatches:", sum(not r["image_mask_dimensions_match"] for r in records))
+
+# to run this script, use the following command:
+# python scripts/83_audit_infection_segmentation.py

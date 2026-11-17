@@ -598,3 +598,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# to run this script, use the following command:
+# python scripts/104_statistical_evaluation_automatic_lung_constraint.py

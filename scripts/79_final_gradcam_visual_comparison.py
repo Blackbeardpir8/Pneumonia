@@ -654,3 +654,6 @@ print("- visualization_summary.csv")
 print("- visualization_summary.json")
 
 print("\nAnalysis completed.")
+
+# to run this script, use the following command:
+# python scripts/79_final_gradcam_visual_comparison.py

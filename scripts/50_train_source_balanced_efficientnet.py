@@ -269,3 +269,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# to run this script, use the following command:
+# python scripts/50_train_source_balanced_efficientnet.py

@@ -50,3 +50,6 @@ print("\n========== SEGMENTATION RESULTS SUMMARY ==========\n")
 print(summary.round(4).to_string(index=False))
 
 print("\nSaved:", output.resolve())
+
+# to run this script, use the following command:
+# python scripts/26_build_segmentation_results_summary.py

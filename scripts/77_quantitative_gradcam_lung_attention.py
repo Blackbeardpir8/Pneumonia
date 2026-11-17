@@ -759,3 +759,5 @@ print(
 print("\nAnalysis completed successfully.")
 
 
+# # to run this script, use the following command:
+# python scripts/77_quantitative_gradcam_lung_attention.py

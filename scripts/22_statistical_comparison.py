@@ -41,3 +41,4 @@ else:
     print("Result: No statistically significant improvement.")
 
 # to run 
+# python scripts/22_statistical_comparison.py

@@ -174,3 +174,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# to run this script, use the following command:
+# python scripts/71_inspect_covid_segmentation_failure.py

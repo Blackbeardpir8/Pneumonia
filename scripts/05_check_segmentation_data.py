@@ -115,4 +115,5 @@ def main():
 if __name__ == "__main__":
     main()
 
-# to run this python scripts/05_check_segmentation_data.py
+# to run this 
+# python scripts/05_check_segmentation_data.py

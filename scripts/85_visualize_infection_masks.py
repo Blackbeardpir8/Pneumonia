@@ -150,3 +150,6 @@ for sample in selected:
         sample["filename"],
         f"{sample['infection_foreground_percent']:.2f}%"
     )
+
+# to run this script, use the following command:
+# python scripts/85_visualize_infection_masks.py

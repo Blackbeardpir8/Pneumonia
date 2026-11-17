@@ -417,3 +417,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# to run this script, use the following command:
+# python scripts/55_final_test_classifier_evaluation.py

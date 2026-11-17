@@ -90,3 +90,6 @@ merged.to_csv(
 )
 
 print("\nComparison saved successfully.")
+
+# to run this script, use the following command:
+# python scripts/21_compare_original_and_balanced.py

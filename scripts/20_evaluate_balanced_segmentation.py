@@ -195,4 +195,5 @@ if __name__ == "__main__":
 
 
 
-# to run python scripts/08_evaluate_validation_segmentation.py
+# to run 
+# python scripts/08_evaluate_validation_segmentation.py

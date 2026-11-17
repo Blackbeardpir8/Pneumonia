@@ -73,3 +73,6 @@ output_path = OUTPUT / "infection_mask_quality_groups.csv"
 df.to_csv(output_path, index=False)
 
 print("\nSaved:", output_path)
+
+# to run this script, use the following command:
+# python scripts/90_classify_infection_mask_quality.py

@@ -138,3 +138,6 @@ for sample in selected:
         "| Identical:",
         sample["identical_masks"],
     )
+
+# to run this script, use the following command:
+# python scripts/89_compare_infection_mask_samples.py

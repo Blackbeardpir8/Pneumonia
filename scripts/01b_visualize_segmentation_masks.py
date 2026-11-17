@@ -235,4 +235,5 @@ if __name__ == "__main__":
     main()
 
 
-# to 
+# to run this script, use the following command:
+# python scripts/01b_visualize_segmentation_masks.py

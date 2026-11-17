@@ -682,3 +682,5 @@ if __name__ == "__main__":
 
 
 
+# to run this script, use the following command:
+# python scripts/101_analyze_lung_constrained_thresholds.py

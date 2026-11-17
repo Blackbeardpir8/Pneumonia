@@ -482,3 +482,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# to run this script, use the following command:
+# python scripts/35_evaluate_clahe_on_segmentation_validation.py
