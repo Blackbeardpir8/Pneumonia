@@ -3,6 +3,7 @@ Code/
 |-- aiml
 |   |-- __init__.py
 |   `-- config.py
+|-- clean_tree
 |-- clean_tree.md
 |-- data
 |   |-- processed
@@ -32,7 +33,18 @@ Code/
 |   |   |       |-- COVID
 |   |   |       |-- Normal
 |   |   |       `-- Viral
-|   |   `-- segmentation
+|   |   |-- segmentation
+|   |   |   |-- manifest.csv
+|   |   |   |-- test
+|   |   |   |   |-- images
+|   |   |   |   `-- masks
+|   |   |   |-- train
+|   |   |   |   |-- images
+|   |   |   |   `-- masks
+|   |   |   `-- val
+|   |   |       |-- images
+|   |   |       `-- masks
+|   |   `-- segmentation_covid
 |   |       |-- manifest.csv
 |   |       |-- test
 |   |       |   |-- images
@@ -110,14 +122,127 @@ Code/
 |       |           |-- NLM-MontgomeryCXRSet-ReadMe.pdf
 |       |           |-- masks
 |       |           `-- test
-|       `-- archive (3)
-|           |-- labels_train.csv
-|           |-- test_images
-|           |   `-- test_images
-|           `-- train_images
-|               `-- train_images
+|       |-- archive (3)
+|       |   |-- labels_train.csv
+|       |   |-- test_images
+|       |   |   `-- test_images
+|       |   `-- train_images
+|       |       `-- train_images
+|       `-- archive(4)
+|           |-- Infection Segmentation Data
+|           |   `-- Infection Segmentation Data
+|           |       |-- Test
+|           |       |   |-- COVID-19
+|           |       |   |   |-- images
+|           |       |   |   |-- infection masks
+|           |       |   |   `-- lung masks
+|           |       |   |-- Non-COVID
+|           |       |   |   |-- images
+|           |       |   |   |-- infection masks
+|           |       |   |   `-- lung masks
+|           |       |   `-- Normal
+|           |       |       |-- images
+|           |       |       |-- infection masks
+|           |       |       `-- lung masks
+|           |       |-- Train
+|           |       |   |-- COVID-19
+|           |       |   |   |-- images
+|           |       |   |   |-- infection masks
+|           |       |   |   `-- lung masks
+|           |       |   |-- Non-COVID
+|           |       |   |   |-- images
+|           |       |   |   |-- infection masks
+|           |       |   |   `-- lung masks
+|           |       |   `-- Normal
+|           |       |       |-- images
+|           |       |       |-- infection masks
+|           |       |       `-- lung masks
+|           |       `-- Val
+|           |           |-- COVID-19
+|           |           |   |-- images
+|           |           |   |-- infection masks
+|           |           |   `-- lung masks
+|           |           |-- Non-COVID
+|           |           |   |-- images
+|           |           |   |-- infection masks
+|           |           |   `-- lung masks
+|           |           `-- Normal
+|           |               |-- images
+|           |               |-- infection masks
+|           |               `-- lung masks
+|           `-- Lung Segmentation Data
+|               `-- Lung Segmentation Data
+|                   |-- Test
+|                   |   |-- COVID-19
+|                   |   |   |-- images
+|                   |   |   `-- lung masks
+|                   |   |-- Non-COVID
+|                   |   |   |-- images
+|                   |   |   `-- lung masks
+|                   |   `-- Normal
+|                   |       |-- images
+|                   |       `-- lung masks
+|                   |-- Train
+|                   |   |-- COVID-19
+|                   |   |   |-- images
+|                   |   |   `-- lung masks
+|                   |   |-- Non-COVID
+|                   |   |   |-- images
+|                   |   |   `-- lung masks
+|                   |   `-- Normal
+|                   |       |-- images
+|                   |       `-- lung masks
+|                   `-- Val
+|                       |-- COVID-19
+|                       |   |-- images
+|                       |   `-- lung masks
+|                       |-- Non-COVID
+|                       |   |-- images
+|                       |   `-- lung masks
+|                       `-- Normal
+|                           |-- images
+|                           `-- lung masks
+|-- documentation
+|   `-- PNEUMONIA_CDSS_MASTER_DOCUMENT.md
 |-- generate_clean_tree.py
+|-- pneumonia_backend
+|   |-- cdss
+|   |   |-- __init__.py
+|   |   |-- admin.py
+|   |   |-- apps.py
+|   |   |-- jinja2
+|   |   |   `-- cdss
+|   |   |       |-- base.html
+|   |   |       |-- css
+|   |   |       |   `-- style.css
+|   |   |       |-- dashboard.html
+|   |   |       |-- js
+|   |   |       |   `-- upload.js
+|   |   |       `-- upload.html
+|   |   |-- models.py
+|   |   |-- serializers.py
+|   |   |-- services
+|   |   |   |-- __init__.py
+|   |   |   `-- inference_service.py
+|   |   |-- tests.py
+|   |   |-- urls.py
+|   |   `-- views.py
+|   |-- config
+|   |   |-- __init__.py
+|   |   |-- asgi.py
+|   |   |-- jinja2.py
+|   |   |-- settings.py
+|   |   |-- urls.py
+|   |   `-- wsgi.py
+|   `-- manage.py
 |-- results
+|   |-- api_inference
+|   |   |-- 0a439588af4e45ce97164003e04c2721
+|   |   |   `-- inference_result.json
+|   |   |-- 558b48f674574eb9854e628656590b9d
+|   |   |   `-- inference_result.json
+|   |   `-- direct_test
+|   |       `-- inference_result.json
 |   |-- classification
 |   |   |-- clahe_segmentation_experiment
 |   |   |   |-- clahe_group_summary.csv
@@ -138,6 +263,10 @@ Code/
 |   |   |   |-- viral_source_error_rates.csv
 |   |   |   `-- visualizations
 |   |   |       `-- selected_examples.csv
+|   |   |-- error_visual_analysis
+|   |   |   |-- correct_viral_selected.csv
+|   |   |   |-- normal_to_covid_selected.csv
+|   |   |   `-- viral_to_bacterial_selected.csv
 |   |   |-- failed_image_intensity_analysis
 |   |   |   |-- group_intensity_summary.csv
 |   |   |   |-- image_intensity_statistics.csv
@@ -146,6 +275,10 @@ Code/
 |   |   |   |-- comparison_group_summary.csv
 |   |   |   |-- failed_image_details.csv
 |   |   |   `-- failed_successful_per_image.csv
+|   |   |-- final_gradcam_visualizations
+|   |   |   |-- representative_images.csv
+|   |   |   |-- visualization_summary.csv
+|   |   |   `-- visualization_summary.json
 |   |   |-- final_test_evaluation
 |   |   |   |-- candidate_comparison_summary.csv
 |   |   |   |-- final_test_evaluation_summary.json
@@ -164,8 +297,27 @@ Code/
 |   |   |   `-- history
 |   |   |       |-- finetuning_history.csv
 |   |   |       `-- finetuning_history.json
+|   |   |-- gradcam_error_analysis
+|   |   |   |-- correct_viral
+|   |   |   |   `-- correct_viral_selected_images.csv
+|   |   |   |-- gradcam_analysis_summary.json
+|   |   |   |-- gradcam_attention_statistics.csv
+|   |   |   |-- normal_to_covid
+|   |   |   |   `-- normal_to_covid_selected_images.csv
+|   |   |   |-- prediction_equivalence_results.csv
+|   |   |   `-- viral_to_bacterial
+|   |   |       `-- viral_to_bacterial_selected_images.csv
 |   |   |-- gradcam_preview
 |   |   |   `-- gradcam_preview_summary.csv
+|   |   |-- infection_severity_analysis
+|   |   |   |-- 0011f2ca9802c97b1f1b83f5aa8458a3a3a39239809aefdbd251f3a026058e13_img_734533885643596249
+|   |   |   |   `-- severity_analysis_result.json
+|   |   |   |-- 0017de0c673890f89620777f6a0d7dac109dce68f26bead45678269f68c00f8d_Normal-1748
+|   |   |   |   `-- severity_analysis_result.json
+|   |   |   |-- 003b3eb1a66a243a284a6bcfc549f84ead1f422880480618328b406479276e60_COVID-1738
+|   |   |   |   `-- severity_analysis_result.json
+|   |   |   `-- 01e15f5723767c0aff217288d2e5ef4a5205ca75cf31267047edb6f65146cb4c_Viral Pneumonia-127
+|   |   |       `-- severity_analysis_result.json
 |   |   |-- inspection
 |   |   |   |-- class_distribution.csv
 |   |   |   |-- image_dimensions.csv
@@ -207,6 +359,9 @@ Code/
 |   |   |   |   |-- image_geometry_intensity_per_image.csv
 |   |   |   |   |-- image_read_failures.csv
 |   |   |   |   `-- summary_by_image_group.csv
+|   |   |   |-- preprocessing_method_comparison
+|   |   |   |   |-- method_summary.csv
+|   |   |   |   `-- metrics_by_image_and_method.csv
 |   |   |   `-- targeted_mask_visual_audit
 |   |   |       |-- most_fragmented
 |   |   |       |-- most_imbalanced
@@ -238,6 +393,11 @@ Code/
 |   |   |   |-- classification_reports.json
 |   |   |   |-- confusion_matrices.json
 |   |   |   `-- source_wise_accuracy.csv
+|   |   |-- quantitative_gradcam_analysis
+|   |   |   |-- group_attention_summary.csv
+|   |   |   |-- per_image_attention_statistics.csv
+|   |   |   |-- quantitative_gradcam_summary.json
+|   |   |   `-- selected_analysis_images.csv
 |   |   |-- single_image_inference
 |   |   |   |-- 0011f2ca9802c97b1f1b83f5aa8458a3a3a39239809aefdbd251f3a026058e13_img_734533885643596249
 |   |   |   |   `-- inference_result.json
@@ -253,7 +413,9 @@ Code/
 |   |   |   |   `-- inference_result.json
 |   |   |   |-- 0156be93b8157bf2f165ad84d5bf9cefef5512ab692c1db67975d1bb0bd68713_img_7396259257736670072
 |   |   |   |   `-- inference_result.json
-|   |   |   `-- 01e15f5723767c0aff217288d2e5ef4a5205ca75cf31267047edb6f65146cb4c_Viral Pneumonia-127
+|   |   |   |-- 01e15f5723767c0aff217288d2e5ef4a5205ca75cf31267047edb6f65146cb4c_Viral Pneumonia-127
+|   |   |   |   `-- inference_result.json
+|   |   |   `-- covid_1579
 |   |   |       `-- inference_result.json
 |   |   |-- source_balanced_model_comparison
 |   |   |   |-- class_wise_comparison.csv
@@ -315,6 +477,17 @@ Code/
 |   |   |   |-- source_confusion_matrix.csv
 |   |   |   |-- source_predictions.csv
 |   |   |   `-- training_history.csv
+|   |   |-- source_wise_analysis
+|   |   |   |-- original_threshold_0_250_argmax_bacterial_viral_dataset_confusion_matrix.csv
+|   |   |   |-- original_threshold_0_250_argmax_covid19_radiography_confusion_matrix.csv
+|   |   |   |-- original_threshold_0_250_threshold_bacterial_viral_dataset_confusion_matrix.csv
+|   |   |   |-- original_threshold_0_250_threshold_covid19_radiography_confusion_matrix.csv
+|   |   |   |-- source_balanced_threshold_0_275_argmax_bacterial_viral_dataset_confusion_matrix.csv
+|   |   |   |-- source_balanced_threshold_0_275_argmax_covid19_radiography_confusion_matrix.csv
+|   |   |   |-- source_balanced_threshold_0_275_threshold_bacterial_viral_dataset_confusion_matrix.csv
+|   |   |   |-- source_balanced_threshold_0_275_threshold_covid19_radiography_confusion_matrix.csv
+|   |   |   |-- source_wise_detailed_results.json
+|   |   |   `-- source_wise_metrics.csv
 |   |   |-- source_wise_class_confusion
 |   |   |   |-- source_classification_metrics.csv
 |   |   |   |-- source_confusion_matrices.csv
@@ -330,6 +503,11 @@ Code/
 |   |   |   |-- source_wise_confusion_matrices.json
 |   |   |   `-- source_wise_metrics_summary.csv
 |   |   |-- split_summary.json
+|   |   |-- statistical_gradcam_analysis
+|   |   |   |-- group_descriptive_statistics.csv
+|   |   |   |-- pairwise_statistical_comparisons.csv
+|   |   |   |-- statistical_analysis_summary.json
+|   |   |   `-- within_group_paired_comparisons.csv
 |   |   |-- training
 |   |   |   |-- training_history.csv
 |   |   |   `-- training_history.json
@@ -399,6 +577,1174 @@ Code/
 |   |       |   `-- validation_predictions.csv
 |   |       |-- viral_misclassification_comparison.csv
 |   |       `-- viral_source_wise_comparison.csv
+|   |-- complete_cdss_inference
+|   |   |-- covid_1579
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1582
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1583
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1584
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1585
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1586
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1587
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1590
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1591
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1592
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1595
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1596
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1597
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1598
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1600
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1601
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1602
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1603
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1604
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1608
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1609
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1610
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1611
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1612
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1613
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1614
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1615
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1616
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1620
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1621
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1622
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1626
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1627
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1630
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1632
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1633
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1634
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1635
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1636
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1637
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1639
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1640
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1641
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1643
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1644
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1645
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1646
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1647
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1649
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1650
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1652
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1653
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1655
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1658
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1662
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1665
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1666
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1667
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1668
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1669
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1671
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1672
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1673
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1675
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1677
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1678
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1679
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1681
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1682
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1683
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1684
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1686
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1687
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1693
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1696
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1698
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1700
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1701
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1702
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1704
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1705
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1708
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1709
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1710
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1711
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1712
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1713
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1716
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1717
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1718
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1719
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1721
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1724
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1725
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1726
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1727
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1728
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1729
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1731
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1732
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1733
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1734
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1735
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1736
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1737
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1744
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1746
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1747
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1748
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1752
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1754
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1756
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1757
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1760
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1761
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1763
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1765
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1767
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1769
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1771
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1774
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1775
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1776
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1777
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1778
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1779
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1781
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1782
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1784
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1785
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1788
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1789
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1790
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1793
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1794
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1795
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1796
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1800
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1801
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1802
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1804
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1807
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1808
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1809
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1812
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1813
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1816
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1817
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1819
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1820
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1822
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1823
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1824
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1825
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1826
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1827
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1828
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1829
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1832
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1835
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1836
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1837
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1842
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1844
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1845
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1846
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1851
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1853
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1854
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1855
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1856
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1857
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1858
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1859
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1860
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1861
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1865
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1866
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1867
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1870
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1871
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1872
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1873
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1874
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1876
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1877
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1878
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1880
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1881
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1882
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1885
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1887
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1888
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1890
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1891
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1892
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1894
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1895
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1896
+|   |   |   `-- inference_result.json
+|   |   |-- covid_1901
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2650
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2651
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2652
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2654
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2655
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2656
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2658
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2659
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2660
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2661
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2662
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2664
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2666
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2667
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2668
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2669
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2670
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2673
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2677
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2680
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2681
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2683
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2684
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2689
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2690
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2691
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2692
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2694
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2695
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2699
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2700
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2701
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2702
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2703
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2704
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2705
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2706
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2708
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2709
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2710
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2711
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2712
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2715
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2716
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2718
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2719
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2720
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2721
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2722
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2723
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2724
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2727
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2730
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2731
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2732
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2736
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2740
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2741
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2745
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2748
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2751
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2752
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2754
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2755
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2756
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2758
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2759
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2760
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2761
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2764
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2766
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2767
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2768
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2770
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2771
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2772
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2774
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2775
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2777
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2778
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2779
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2780
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2781
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2782
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2784
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2785
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2786
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2787
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2788
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2790
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2791
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2794
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2796
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2797
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2800
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2801
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2802
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2803
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2804
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2807
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2808
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2809
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2810
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2811
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2812
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2813
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2814
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2815
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2817
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2818
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2819
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2820
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2821
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2824
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2827
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2829
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2830
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2831
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2832
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2833
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2834
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2836
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2837
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2838
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2839
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2840
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2841
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2843
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2845
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2846
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2847
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2850
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2851
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2852
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2855
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2857
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2858
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2859
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2860
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2862
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2864
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2865
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2868
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2869
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2871
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2875
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2876
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2878
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2879
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2880
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2881
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2882
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2884
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2885
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2886
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2887
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2889
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2892
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2894
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2895
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2896
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2899
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2900
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2901
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2903
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2904
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2912
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2913
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2916
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2918
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2920
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2923
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2924
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2925
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2927
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2929
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2932
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2933
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2934
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2937
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2938
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2939
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2941
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2943
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2944
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2945
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2946
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2947
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2948
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2949
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2950
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2951
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2953
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2954
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2955
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2956
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2957
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2958
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2959
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2961
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2962
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2963
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2965
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2967
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2968
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2969
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2970
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2972
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2973
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2974
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2976
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2977
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2979
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2981
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2982
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2984
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2986
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2987
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2988
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2990
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2992
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2993
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2995
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2996
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2997
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2998
+|   |   |   `-- inference_result.json
+|   |   |-- covid_2999
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3000
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3001
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3005
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3006
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3008
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3009
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3010
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3011
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3013
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3015
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3016
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3018
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3019
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3020
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3021
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3022
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3024
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3026
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3027
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3030
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3033
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3034
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3035
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3039
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3040
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3041
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3042
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3043
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3044
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3045
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3046
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3047
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3049
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3050
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3052
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3053
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3057
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3058
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3060
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3061
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3065
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3067
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3068
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3069
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3070
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3074
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3075
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3081
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3082
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3085
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3086
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3087
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3091
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3092
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3093
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3095
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3097
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3099
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3100
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3101
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3103
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3104
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3105
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3106
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3107
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3108
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3109
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3110
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3113
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3114
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3116
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3119
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3120
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3122
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3125
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3126
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3127
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3128
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3129
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3131
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3132
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3133
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3134
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3136
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3137
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3139
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3140
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3142
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3143
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3145
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3146
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3151
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3152
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3154
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3155
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3156
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3157
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3158
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3159
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3162
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3164
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3167
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3168
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3170
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3171
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3174
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3176
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3178
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3179
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3180
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3181
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3182
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3183
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3187
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3188
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3189
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3191
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3192
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3193
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3195
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3196
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3199
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3200
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3201
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3202
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3203
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3205
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3206
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3207
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3209
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3211
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3212
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3213
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3214
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3215
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3216
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3217
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3218
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3219
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3221
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3222
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3226
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3228
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3229
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3230
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3232
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3233
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3234
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3235
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3236
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3237
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3239
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3242
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3243
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3248
+|   |   |   `-- inference_result.json
+|   |   |-- covid_3249
+|   |   |   `-- inference_result.json
+|   |   `-- summary.csv
 |   |-- dataset_audit
 |   |   |-- classification_split_counts.csv
 |   |   |-- directory_inventory.csv
@@ -409,6 +1755,113 @@ Code/
 |   |   |-- segmentation_external_duplicates.csv
 |   |   |-- segmentation_internal_duplicates.csv
 |   |   `-- segmentation_mask_audit.csv
+|   |-- infection_mask_investigation
+|   |   |-- identical_mask_investigation.csv
+|   |   |-- infection_area_quality_audit.csv
+|   |   |-- infection_lung_overlap_audit.csv
+|   |   |-- infection_mask_quality_groups.csv
+|   |   |-- infection_mask_statistics.csv
+|   |   |-- infection_segmentation_audit.csv
+|   |   `-- infection_split_duplicate_audit.csv
+|   |-- infection_segmentation
+|   |   |-- automatic_constraint_statistical_evaluation
+|   |   |   |-- annotation_group_comparison.csv
+|   |   |   |-- per_image_dice_comparison.csv
+|   |   |   `-- statistical_evaluation_summary.json
+|   |   |-- automatic_lung_constraint_analysis
+|   |   |   |-- automatic_lung_constraint_global_summary.csv
+|   |   |   |-- automatic_lung_constraint_mean_summary.csv
+|   |   |   |-- automatic_lung_constraint_per_image.csv
+|   |   |   |-- automatic_lung_constraint_subgroup_summary.csv
+|   |   |   |-- automatic_lung_constraint_summary.json
+|   |   |   `-- predicted_lung_masks
+|   |   |-- automatic_lung_constraint_visual_investigation
+|   |   |   |-- automatic_lung_error_investigation.csv
+|   |   |   `-- selected_visual_cases.csv
+|   |   |-- constrained_threshold_analysis
+|   |   |   |-- constrained_threshold_analysis_summary.json
+|   |   |   |-- constrained_threshold_global_summary.csv
+|   |   |   |-- constrained_threshold_mean_summary.csv
+|   |   |   |-- constrained_threshold_per_image.csv
+|   |   |   `-- constrained_threshold_subgroup_summary.csv
+|   |   |-- final_loss_function_test_comparison
+|   |   |   |-- final_test_model_comparison.csv
+|   |   |   |-- final_test_model_comparison.json
+|   |   |   |-- original_bce_dice_per_image_results.csv
+|   |   |   `-- weighted_bce_dice_per_image_results.csv
+|   |   |-- infection_area_performance_analysis
+|   |   |   |-- existing_annotation_group_performance.csv
+|   |   |   |-- infection_area_per_image_analysis.csv
+|   |   |   |-- infection_area_performance_summary.json
+|   |   |   `-- reference_area_group_performance.csv
+|   |   |-- loss_function_comparison
+|   |   |   |-- loss_function_comparison.csv
+|   |   |   `-- loss_function_comparison.json
+|   |   |-- loss_function_experiments
+|   |   |   |-- tversky
+|   |   |   |   |-- summary.json
+|   |   |   |   `-- training_history.csv
+|   |   |   `-- weighted_bce_dice
+|   |   |       |-- summary.json
+|   |   |       `-- training_history.csv
+|   |   |-- lung_constraint_analysis
+|   |   |   |-- lung_constraint_analysis_summary.json
+|   |   |   |-- lung_constraint_global_summary.csv
+|   |   |   |-- lung_constraint_per_image.csv
+|   |   |   `-- lung_constraint_subgroup_summary.csv
+|   |   |-- overprediction_underprediction_visual_investigation
+|   |   |   `-- selected_visual_cases.csv
+|   |   |-- prediction_error_analysis
+|   |   |   |-- test_prediction_error_by_subgroup.csv
+|   |   |   |-- test_prediction_error_per_image.csv
+|   |   |   `-- test_prediction_error_summary.json
+|   |   |-- selected_threshold_independent_test_evaluation
+|   |   |   |-- test_per_image_metrics.csv
+|   |   |   |-- test_threshold_comparison.csv
+|   |   |   `-- test_threshold_summary.json
+|   |   |-- selective_lung_constraint_analysis
+|   |   |   |-- annotation_group_strategy_comparison.csv
+|   |   |   |-- selective_constraint_per_image.csv
+|   |   |   |-- selective_constraint_summary.json
+|   |   |   |-- strategy_comparison.csv
+|   |   |   `-- strategy_pixel_comparison.csv
+|   |   |-- statistical_comparison
+|   |   |   |-- paired_per_image_dice_results.csv
+|   |   |   |-- statistical_comparison_summary.csv
+|   |   |   `-- statistical_comparison_summary.json
+|   |   |-- subgroup_analysis
+|   |   |   |-- test_subgroup_analysis_summary.json
+|   |   |   |-- test_subgroup_per_image.csv
+|   |   |   `-- test_subgroup_summary.csv
+|   |   |-- test_evaluation
+|   |   |   |-- test_image_metrics.csv
+|   |   |   `-- test_metrics_summary.json
+|   |   |-- test_threshold_area_group_analysis
+|   |   |   |-- paired_test_results_with_area_groups.csv
+|   |   |   |-- test_area_group_analysis_summary.json
+|   |   |   |-- test_area_group_paired_statistics.csv
+|   |   |   `-- test_area_group_threshold_metrics.csv
+|   |   |-- test_threshold_statistical_analysis
+|   |   |   |-- paired_test_dice_differences.csv
+|   |   |   `-- test_threshold_statistical_summary.json
+|   |   |-- threshold_analysis
+|   |   |   |-- validation_threshold_analysis_summary.json
+|   |   |   |-- validation_threshold_global_summary.csv
+|   |   |   |-- validation_threshold_per_image.csv
+|   |   |   `-- validation_threshold_subgroup_summary.csv
+|   |   |-- threshold_sensitivity_by_area_group
+|   |   |   |-- best_threshold_by_area_group.csv
+|   |   |   |-- threshold_area_group_comparison.csv
+|   |   |   |-- threshold_overall_comparison.csv
+|   |   |   |-- threshold_per_image_results.csv
+|   |   |   `-- threshold_sensitivity_summary.json
+|   |   |-- threshold_visual_comparison
+|   |   |   `-- threshold_visual_comparison.csv
+|   |   |-- training_history.csv
+|   |   `-- visualizations
+|   |-- research_report
+|   |   |-- pneumonia_cdss_research_findings.md
+|   |   `-- research_metrics_summary.json
 |   `-- segmentation
 |       |-- balanced_training_history.csv
 |       |-- balanced_validation_metrics.csv
@@ -417,6 +1870,23 @@ Code/
 |       |   |-- validation_per_image_results.csv
 |       |   `-- validation_summary.csv
 |       |-- clinical_readings_audit.csv
+|       |-- covid_domain_baseline
+|       |   |-- class_wise_metrics.csv
+|       |   |-- overall_summary.json
+|       |   `-- per_image_metrics.csv
+|       |-- covid_domain_final_test
+|       |   |-- class_wise_comparison.csv
+|       |   |-- error_analysis
+|       |   |   `-- worst10_image_details.csv
+|       |   |-- failure_inspection
+|       |   |-- overall_comparison.json
+|       |   `-- per_image_comparison.csv
+|       |-- covid_domain_finetuning
+|       |   |-- finetuning_history.csv
+|       |   `-- finetuning_summary.json
+|       |-- covid_mask_audit
+|       |   |-- covid_segmentation_pair_audit.csv
+|       |   `-- visual_samples
 |       |-- error_analysis
 |       |-- final_test_metrics.csv
 |       |-- lung_region_intensity_analysis
@@ -444,9 +1914,19 @@ Code/
 |   |-- efficientnetb0_source_balanced_last.keras
 |   |-- efficientnetb0_viral_weight_1.2x_best.keras
 |   |-- efficientnetb0_viral_weight_1.4x_best.keras
+|   |-- infection_loss_experiments
+|   |   |-- tversky
+|   |   |   |-- best_model.keras
+|   |   |   `-- last_model.keras
+|   |   `-- weighted_bce_dice
+|   |       |-- best_model.keras
+|   |       `-- last_model.keras
+|   |-- unet_covid_infection_segmentation_best.keras
 |   |-- unet_lung_segmentation.keras
 |   |-- unet_lung_segmentation_balanced.keras
 |   |-- unet_lung_segmentation_balanced_last.keras
+|   |-- unet_lung_segmentation_covid_finetuned_best.keras
+|   |-- unet_lung_segmentation_covid_finetuned_last.keras
 |   `-- unet_lung_segmentation_last.keras
 |-- scripts
 |   |-- 01_inspect_and_prepare_data.py
@@ -468,8 +1948,25 @@ Code/
 |   |-- 08_evaluate_validation_segmentation.py
 |   |-- 09_inspect_worst_segmentation.py
 |   |-- 09_visualize_classification_errors.py
+|   |-- 100_compare_lung_constrained_segmentation.py
+|   |-- 101_analyze_lung_constrained_thresholds.py
+|   |-- 102_evaluate_automatic_lung_constraint.py
+|   |-- 103_visualize_automatic_lung_constraint_errors.py
+|   |-- 104_statistical_evaluation_automatic_lung_constraint.py
+|   |-- 105_evaluate_selective_lung_constraint.py
+|   |-- 106_analyze_infection_area_and_segmentation_performance.py
+|   |-- 107_visualize_infection_overprediction_underprediction.py
+|   |-- 108_threshold_sensitivity_by_infection_area.py
+|   |-- 109_evaluate_selected_threshold_on_test.py
 |   |-- 10_analyze_source_bias.py
 |   |-- 10_check_problem_image.py
+|   |-- 110_statistical_test_threshold_comparison.py
+|   |-- 111_test_threshold_comparison_by_area_group.py
+|   |-- 112_compare_infection_loss_functions.py
+|   |-- 113_compare_infection_loss_results.py
+|   |-- 114_compare_infection_models_test.py
+|   |-- 115_statistical_comparison_infection_models.py
+|   |-- 116_run_complete_cdss.py
 |   |-- 11_test_dataset_source_bias.py
 |   |-- 11_visualize_preprocessing.py
 |   |-- 12_compare_dataset_image_statistics.py
@@ -530,7 +2027,46 @@ Code/
 |   |-- 58_visualize_low_mask_segmentation_audit.py
 |   |-- 59_full_validation_mask_quality_audit.py
 |   |-- 60_targeted_mask_visual_audit.py
-|   `-- 61_preprocessing_domain_audit.py
+|   |-- 61_preprocessing_domain_audit.py
+|   |-- 62_compare_unet_preprocessing_methods.py
+|   |-- 63_infection_severity_analysis.py
+|   |-- 64_audit_covid_segmentation_pairs.py
+|   |-- 65_visualize_covid_mask_alignment.py
+|   |-- 66_prepare_covid_segmentation_data.py
+|   |-- 67_verify_covid_segmentation_data.py
+|   |-- 68_evaluate_existing_unet_on_covid_validation.py
+|   |-- 69_finetune_covid_domain_unet.py
+|   |-- 70_compare_unet_models_on_covid_test.py
+|   |-- 71_inspect_covid_segmentation_failure.py
+|   |-- 72_visualize_worst10_covid_test_predictions.py
+|   |-- 73_classifier_source_wise_analysis.py
+|   |-- 74_visualize_classifier_errors.py
+|   |-- 75_gradcam_error_analysis.py
+|   |-- 75a_inspect_classifier_architecture.py
+|   |-- 76_verify_gradcam_prediction_equivalence.py
+|   |-- 77_quantitative_gradcam_lung_attention.py
+|   |-- 78_statistical_gradcam_comparison.py
+|   |-- 79_final_gradcam_visual_comparison.py
+|   |-- 80_generate_research_findings_report.py
+|   |-- 81_inspect_covid_masks.py
+|   |-- 82_visualize_covid_masks.py
+|   |-- 83_audit_infection_segmentation.py
+|   |-- 84_analyze_infection_mask_statistics.py
+|   |-- 85_visualize_infection_masks.py
+|   |-- 86_verify_suspicious_masks.py
+|   |-- 87_analyze_infection_lung_overlap.py
+|   |-- 88_analyze_infection_area_quality.py
+|   |-- 89_compare_infection_mask_samples.py
+|   |-- 90_classify_infection_mask_quality.py
+|   |-- 91_investigate_identical_masks.py
+|   |-- 92_audit_infection_split_leakage.py
+|   |-- 93_train_covid_infection_unet.py
+|   |-- 94_evaluate_covid_infection_unet.py
+|   |-- 95_visualize_infection_predictions.py
+|   |-- 96_analyze_infection_test_subgroups.py
+|   |-- 97_analyze_infection_prediction_errors.py
+|   |-- 98_analyze_infection_threshold_sensitivity.py
+|   `-- 99_visualize_infection_threshold_comparison.py
 `-- venv311
     |-- pyvenv.cfg
     `-- share

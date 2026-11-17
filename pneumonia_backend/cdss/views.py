@@ -3,7 +3,8 @@ import tempfile
 import uuid
 from pathlib import Path
 from urllib.parse import quote
-
+from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -337,3 +338,100 @@ class PredictionDetailAPIView(RetrieveAPIView):
 
     lookup_field = "id"
     lookup_url_kwarg = "pk"
+
+
+# =====================================================
+# CDSS FRONTEND — DASHBOARD
+# =====================================================
+def dashboard_view(request):
+    """
+    Render the CDSS dashboard using Jinja2.
+    """
+    total_predictions = Prediction.objects.count()
+    normal_predictions = Prediction.objects.filter(
+        predicted_class="Normal"
+    ).count()
+    pneumonia_predictions = Prediction.objects.exclude(
+        predicted_class="Normal"
+    ).count()
+    recent_predictions = Prediction.objects.order_by(
+        "-created_at"
+    )[:5]
+
+    context = {
+        "total_predictions": total_predictions,
+        "normal_predictions": normal_predictions,
+        "pneumonia_predictions": pneumonia_predictions,
+        "recent_predictions": recent_predictions,
+    }
+
+    return render(
+        request,
+        "cdss/dashboard.html",
+        context,
+        using="jinja2",
+    )
+
+# =====================================================
+# CDSS FRONTEND — X-RAY UPLOAD PAGE
+# =====================================================
+
+def upload_page_view(request):
+    """
+    Render the chest X-ray upload page using Jinja2.
+    """
+
+    return render(
+        request,
+        "cdss/upload.html",
+        {},
+        using="jinja2",
+    )
+
+# =====================================================
+# CDSS FRONTEND — PREDICTION RESULT
+# =====================================================
+
+def prediction_result_view(request, pk):
+    """
+    Display the saved CDSS prediction result.
+    """
+
+    prediction = get_object_or_404(
+        Prediction,
+        pk=pk
+    )
+
+    return render(
+        request,
+        "cdss/result.html",
+        {
+            "prediction": prediction,
+        },
+        using="jinja2",
+    )
+
+
+
+# =====================================================
+# CDSS FRONTEND — PREDICTION HISTORY
+# =====================================================
+
+def prediction_history_view(request):
+    """
+    Display all previously saved CDSS predictions.
+    """
+
+    predictions = Prediction.objects.order_by("-created_at")
+
+    context = {
+        "predictions": predictions,
+        "total_predictions": predictions.count(),
+    }
+
+    return render(
+        request,
+        "cdss/history.html",
+        context,
+        using="jinja2",
+    )

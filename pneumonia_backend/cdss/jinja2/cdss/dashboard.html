@@ -1,0 +1,116 @@
+{% extends "cdss/base.html" %}
+
+{% block title %}Dashboard | Pneumonia CDSS{% endblock %}
+
+{% block page_heading %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="welcome-section">
+    <h2>Welcome to Pneumonia CDSS</h2>
+    <p>
+        AI-assisted chest X-ray analysis and clinical decision support
+        for research purposes.
+    </p>
+</div>
+
+<!-- Statistics -->
+<div class="stats-grid">
+
+    <div class="stat-card">
+        <div class="stat-label">Total Predictions</div>
+        <div class="stat-value">{{ total_predictions }}</div>
+        <div class="stat-description">Total X-rays analyzed</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-label">Normal Predictions</div>
+        <div class="stat-value">{{ normal_predictions }}</div>
+        <div class="stat-description">Predicted Normal category</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-label">Pneumonia-related Predictions</div>
+        <div class="stat-value">{{ pneumonia_predictions }}</div>
+        <div class="stat-description">Viral, Bacterial or COVID categories</div>
+    </div>
+
+</div>
+
+<!-- Quick Actions -->
+<div class="section-heading">
+    <h3>Quick Actions</h3>
+</div>
+
+<div class="action-grid">
+
+    <a href="{{ url('cdss-upload') }}" class="action-card">
+        <h4>New analysis</h4>
+        <p>Upload a chest X-ray and get an AI-assisted research prediction.</p>
+        <span>Start Analysis</span>
+    </a>
+
+    <a href="{{ url('cdss-history-page') }}" class="action-card">
+        <h4>Prediction history</h4>
+        <p>Review all previously analyzed X-rays and their results.</p>
+        <span>View History</span>
+    </a>
+
+</div>
+
+<!-- Recent Predictions -->
+<div class="section-heading">
+    <h3>Recent Predictions</h3>
+</div>
+
+<div class="table-container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image Name</th>
+                <th>Predicted Class</th>
+                <th>Confidence</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for prediction in recent_predictions %}
+            <tr>
+                <td>{{ prediction.id }}</td>
+                <td>{{ prediction.image_name }}</td>
+                <td>{{ prediction.predicted_class }}</td>
+                <td>{{ "%.2f"|format(prediction.confidence) }}%</td>
+                <td>{{ prediction.created_at.strftime("%d %b %Y, %I:%M %p") }}</td>
+                <td>
+                    <a href="{{ url('cdss-result', kwargs={'pk': prediction.id}) }}"
+                       class="secondary-button">
+                        View Result
+                    </a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="empty-state">
+                    No predictions available yet.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+<div class="research-notice">
+    <strong>Research Disclaimer</strong>
+    <p>
+        This system provides experimental AI-generated predictions.
+        Results are not confirmed medical diagnoses and must not replace
+        professional medical evaluation.
+    </p>
+</div>
+
+{% endblock %}

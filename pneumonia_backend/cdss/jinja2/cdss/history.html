@@ -1,0 +1,119 @@
+{% extends "cdss/base.html" %}
+
+{% block title %}Prediction History | Pneumonia CDSS{% endblock %}
+
+{% block page_heading %}Prediction History{% endblock %}
+
+{% block content %}
+
+<div class="welcome-section">
+    <h2>Prediction History</h2>
+    <p>
+        View all previously analyzed chest X-ray records
+        and their AI-generated research predictions.
+    </p>
+</div>
+
+<!-- History Statistics -->
+<div class="stats-grid">
+
+    <div class="stat-card">
+        <div class="stat-label">Total Predictions</div>
+        <div class="stat-value">{{ total_predictions }}</div>
+        <div class="stat-description">
+            Total saved X-ray analyses
+        </div>
+    </div>
+
+</div>
+
+<!-- History Table -->
+<div class="section-heading">
+    <h3>All Predictions</h3>
+</div>
+
+<div class="table-container">
+
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image Name</th>
+                <th>Predicted Class</th>
+                <th>Confidence</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for prediction in predictions %}
+
+            <tr>
+                <td>{{ prediction.id }}</td>
+
+                <td>{{ prediction.image_name }}</td>
+
+                <td>{{ prediction.predicted_class }}</td>
+
+                <td>{{ "%.2f"|format(prediction.confidence) }}%</td>
+
+                <td>{{ prediction.created_at.strftime("%d %b %Y, %I:%M %p") }}</td>
+
+                <td>
+                    <a
+                        href="{{ url('cdss-result', kwargs={'pk': prediction.id}) }}"
+                        class="secondary-button"
+                    >
+                        View Result
+                    </a>
+                </td>
+            </tr>
+
+            {% else %}
+
+            <tr>
+                <td colspan="6" class="empty-state">
+                    No prediction records available yet.
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<div class="research-notice">
+    <strong>Research Disclaimer</strong>
+
+    <p>
+        These records contain experimental AI-generated predictions.
+        They are not confirmed medical diagnoses and must not replace
+        professional medical evaluation.
+    </p>
+</div>
+
+<div class="result-actions">
+
+    <a
+        href="{{ url('cdss-upload') }}"
+        class="upload-button"
+    >
+        Analyze New X-ray
+    </a>
+
+    <a
+        href="{{ url('cdss-dashboard') }}"
+        class="secondary-button"
+    >
+        Back to Dashboard
+    </a>
+
+</div>
+
+{% endblock %}

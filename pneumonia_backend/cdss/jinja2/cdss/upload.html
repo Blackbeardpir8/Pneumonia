@@ -1,0 +1,86 @@
+{% extends "cdss/base.html" %}
+
+{% block title %}New X-ray Analysis | Pneumonia CDSS{% endblock %}
+
+{% block page_heading %}New X-ray Analysis{% endblock %}
+
+{% block content %}
+
+<div class="welcome-section">
+    <h2>Chest X-ray Analysis</h2>
+    <p>Upload a chest X-ray image for AI-assisted research analysis.</p>
+</div>
+
+<div class="upload-container">
+
+    <form
+        id="xrayUploadForm"
+        data-api-url="{{ url('chest-xray-predict') }}"
+        data-result-url-template="{{ url('cdss-result', kwargs={'pk': 0}) }}"
+    >
+
+        <div class="upload-box" id="uploadBox">
+
+            <div id="uploadPlaceholder">
+                <h3>Upload Chest X-ray</h3>
+                <p>Select a chest X-ray image from your device.</p>
+
+                <label for="xrayImage" class="upload-button">
+                    Choose Image
+                </label>
+
+                <input
+                    type="file"
+                    id="xrayImage"
+                    name="image"
+                    accept=".png,.jpg,.jpeg,.bmp,.tif,.tiff"
+                    hidden
+                >
+
+                <p class="file-hint">
+                    Supported formats: PNG, JPG, JPEG, BMP, TIFF
+                </p>
+            </div>
+
+            <div id="previewContainer" hidden>
+                <img id="imagePreview" alt="Selected chest X-ray preview">
+
+                <p id="fileName"></p>
+
+                <button type="button" id="removeImage" class="remove-button">
+                    Remove Image
+                </button>
+            </div>
+
+        </div>
+
+        <div class="upload-actions">
+            <button type="submit" id="analyzeButton" disabled>
+                Analyze Chest X-ray
+            </button>
+        </div>
+
+        <div id="uploadError" class="upload-error" hidden></div>
+
+        <div id="loadingMessage" class="loading-message" hidden>
+            Processing chest X-ray. Please wait...
+        </div>
+
+    </form>
+
+</div>
+
+<div class="research-notice">
+    <strong>Important Research Disclaimer</strong>
+    <p>
+        This system generates experimental AI predictions.
+        It does not provide a confirmed medical diagnosis.
+        Always rely on qualified medical professionals for clinical decisions.
+    </p>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ static('cdss/js/upload.js') }}"></script>
+{% endblock %}

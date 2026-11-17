@@ -1,0 +1,257 @@
+{% extends "cdss/base.html" %}
+
+{% block title %}Prediction Result | Pneumonia CDSS{% endblock %}
+
+{% block page_heading %}Prediction Result{% endblock %}
+
+{% block content %}
+<div class="welcome-section">
+    <h2>Chest X-ray Analysis Result</h2>
+    <p>AI-generated research prediction and visualization results.</p>
+</div>
+
+<!-- Prediction Summary -->
+<div class="result-summary">
+    <div>
+        <span class="result-label">Predicted Category</span>
+        <h2>{{ prediction.predicted_class }}</h2>
+    </div>
+    <div>
+        <span class="result-label">Selected Class Probability</span>
+        <h2>{{ "%.2f"|format(prediction.confidence) }}%</h2>
+    </div>
+    <div>
+        <span class="result-label">Decision Rule</span>
+        <h2>{{ prediction.decision_rule }}</h2>
+    </div>
+</div>
+
+<!-- Class Probabilities -->
+<div class="section-heading">
+    <h3>Classification Probabilities</h3>
+</div>
+<div class="result-card">
+    {% set probabilities = [
+        ("Normal", prediction.normal_probability),
+        ("Viral", prediction.viral_probability),
+        ("Bacterial", prediction.bacterial_probability),
+        ("COVID", prediction.covid_probability)
+    ] %}
+    {% for name, probability in probabilities %}
+    <div class="probability-item">
+        <div class="probability-header">
+            <strong>{{ name }}</strong>
+            <span>{{ "%.2f"|format(probability) }}%</span>
+        </div>
+        <div class="probability-track">
+            <div class="probability-fill"
+                 style="width: {{ probability }}%">
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Prediction Transparency -->
+<div class="section-heading">
+    <h3>Prediction Transparency</h3>
+</div>
+<div class="result-card">
+    {% set class_probabilities = {
+        "Normal": prediction.normal_probability,
+        "Viral": prediction.viral_probability,
+        "Bacterial": prediction.bacterial_probability,
+        "COVID": prediction.covid_probability
+    } %}
+    {% set highest_class = class_probabilities|dictsort(by="value", reverse=true)|first %}
+    <p>
+        <strong>Highest probability category:</strong>
+        {{ highest_class[0] }}
+    </p>
+    <p>
+        <strong>Highest probability:</strong>
+        {{ "%.2f"|format(highest_class[1]) }}%
+    </p>
+    <p>
+        <strong>Selected category:</strong>
+        {{ prediction.predicted_class }}
+    </p>
+    <p>
+        <strong>Decision rule:</strong>
+        {{ prediction.decision_rule }}
+    </p>
+    {% if prediction.predicted_class != highest_class[0] %}
+    <p class="research-warning">
+        The configured decision rule selected a category other than
+        the highest-probability category.
+    </p>
+    {% else %}
+    <p class="research-success">
+        The selected category matches the highest-probability category.
+    </p>
+    {% endif %}
+</div>
+
+<!-- Original X-ray -->
+<div class="section-heading">
+    <h3>Original Chest X-ray</h3>
+</div>
+<div class="result-card">
+    {% if prediction.input_image_path %}
+    <div class="image-grid image-grid--feature">
+        <figure class="image-item">
+            <img
+                src="{{ media(prediction.input_image_path) }}"
+                alt="Original chest X-ray"
+                class="result-image"
+            >
+        </figure>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Segmentation -->
+<div class="section-heading">
+    <h3>Segmentation Analysis</h3>
+</div>
+<div class="result-grid">
+    <div class="result-card">
+        <h4>Lung Segmentation</h4>
+        <p>Threshold: {{ prediction.lung_threshold }}</p>
+        <p>
+            Lung mask area:
+            {{ "%.2f"|format(prediction.lung_mask_area_percent) }}%
+        </p>
+        <div class="image-grid">
+            {% if prediction.lung_mask_path %}
+            <figure class="image-item">
+                <img
+                    src="{{ media(prediction.lung_mask_path) }}"
+                    alt="Lung segmentation mask"
+                    class="result-image"
+                >
+                <figcaption>Mask</figcaption>
+            </figure>
+            {% endif %}
+            {% if prediction.lung_overlay_path %}
+            <figure class="image-item">
+                <img
+                    src="{{ media(prediction.lung_overlay_path) }}"
+                    alt="Lung segmentation overlay"
+                    class="result-image"
+                >
+                <figcaption>Overlay</figcaption>
+            </figure>
+            {% endif %}
+        </div>
+    </div>
+    <div class="result-card">
+        <h4>Infection Segmentation</h4>
+        <p>Status: {{ prediction.infection_segmentation_status }}</p>
+        <p>Threshold: {{ prediction.infection_threshold }}</p>
+        <p>
+            Mask area:
+            {{ "%.2f"|format(prediction.infection_mask_area_percent) }}%
+        </p>
+        <div class="image-grid">
+            {% if prediction.infection_mask_path %}
+            <figure class="image-item">
+                <img
+                    src="{{ media(prediction.infection_mask_path) }}"
+                    alt="Infection segmentation mask"
+                    class="result-image"
+                >
+                <figcaption>Mask</figcaption>
+            </figure>
+            {% endif %}
+            {% if prediction.infection_overlay_path %}
+            <figure class="image-item">
+                <img
+                    src="{{ media(prediction.infection_overlay_path) }}"
+                    alt="Infection segmentation overlay"
+                    class="result-image"
+                >
+                <figcaption>Overlay</figcaption>
+            </figure>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Grad-CAM -->
+<div class="section-heading">
+    <h3>Grad-CAM Explainability</h3>
+</div>
+<div class="result-card">
+    <p>
+        Activation inside lung:
+        {{ "%.2f"|format(prediction.gradcam_inside_lung_percent or 0) }}%
+    </p>
+    <p>
+        Activation outside lung:
+        {{ "%.2f"|format(prediction.gradcam_outside_lung_percent or 0) }}%
+    </p>
+    <div class="image-grid">
+        {% if prediction.gradcam_overlay_path %}
+        <figure class="image-item">
+            <img
+                src="{{ media(prediction.gradcam_overlay_path) }}"
+                alt="Grad-CAM overlay"
+                class="result-image"
+            >
+            <figcaption>Overlay</figcaption>
+        </figure>
+        {% endif %}
+        {% if prediction.gradcam_heatmap_path %}
+        <figure class="image-item">
+            <img
+                src="{{ media(prediction.gradcam_heatmap_path) }}"
+                alt="Grad-CAM heatmap"
+                class="result-image"
+            >
+            <figcaption>Heatmap</figcaption>
+        </figure>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Combined Visualization -->
+{% if prediction.combined_visualization_path %}
+<div class="section-heading">
+    <h3>Combined Analysis Visualization</h3>
+</div>
+<div class="result-card">
+    <div class="image-grid image-grid--feature">
+        <figure class="image-item">
+            <img
+                src="{{ media(prediction.combined_visualization_path) }}"
+                alt="Combined analysis visualization"
+                class="result-image"
+            >
+        </figure>
+    </div>
+</div>
+{% endif %}
+
+<!-- Disclaimer -->
+<div class="research-notice">
+    <strong>Research Disclaimer</strong>
+    <p>
+        This system generates experimental AI predictions.
+        Classifier probabilities are not guaranteed to be calibrated.
+        Grad-CAM is model attribution, not a validated lesion map.
+        Infection segmentation is experimental and is not a clinically
+        validated measurement of infection extent.
+        This result is not a confirmed medical diagnosis.
+    </p>
+</div>
+
+<div class="result-actions">
+    <a href="{{ url('cdss-upload') }}" class="upload-button">
+        Analyze Another X-ray
+    </a>
+    <a href="{{ url('cdss-dashboard') }}" class="secondary-button">
+        Back to Dashboard
+    </a>
+</div>
+{% endblock %}

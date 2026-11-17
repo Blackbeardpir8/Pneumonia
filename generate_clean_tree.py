@@ -32,7 +32,7 @@ EXCLUDE_EXTENSIONS = {
     ".woff", ".woff2", ".ttf", ".eot",
     ".map", ".pyc", ".pyd", ".dll", ".so",
     ".log", ".sqlite3", ".bak", ".dat", ".dir",
-    ".mmdb", ".txt"
+    ".mmdb", ".txt", "json"
 }
 
 # Exact files to skip
