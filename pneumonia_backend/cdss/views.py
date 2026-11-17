@@ -1,4 +1,3 @@
-
 import logging
 import tempfile
 import uuid
@@ -67,6 +66,63 @@ def get_media_relative_path(file_path):
 
     except (ValueError, OSError):
         return ""
+
+
+def build_assessment(result):
+    """
+    Build a patient-friendly assessment from existing model outputs.
+    """
+    predicted_class = result["predicted_class"]
+    confidence = result["selected_class_probability_percent"]
+    probabilities = result["class_probabilities_percent"]
+
+    if predicted_class == "Normal":
+        assessment_type = "normal"
+        pneumonia_prediction = False
+        summary = (
+            "The AI model predicts the Normal category. "
+            "No pneumonia-related category was predicted."
+        )
+        predicted_pneumonia_type = None
+    else:
+        assessment_type = "pneumonia_pattern_predicted"
+        pneumonia_prediction = True
+        summary = (
+            f"The AI model predicts a pneumonia-related pattern "
+            f"in the {predicted_class} category."
+        )
+        predicted_pneumonia_type = predicted_class
+
+    infection = result.get("infection_segmentation", {})
+
+    if predicted_class == "COVID":
+        infection_extent = {
+            "available": True,
+            "value_percent": infection.get(
+                "mask_area_percent_of_256_input"
+            ),
+        }
+    else:
+        infection_extent = {
+            "available": False,
+            "value_percent": None,
+        }
+
+    # The pneumonia_pattern_predicted field is a model-derived result,
+    # not proof that the patient has pneumonia or that pneumonia is absent.
+    return {
+        "assessment_type": assessment_type,
+        "pneumonia_prediction": pneumonia_prediction,
+        "predicted_pneumonia_type": predicted_pneumonia_type,
+        "summary": summary,
+        "confidence_percent": confidence,
+        "class_probabilities_percent": probabilities,
+        "infection_extent": infection_extent,
+        "disclaimer": (
+            "The pneumonia_pattern_predicted field is a model-derived result, "
+            "not proof that the patient has pneumonia or that pneumonia is absent."
+        ),
+    }
 
 
 def save_prediction(image_name, result):
@@ -205,6 +261,9 @@ class ChestXrayInferenceAPIView(APIView):
             )
 
             result["image_name"] = uploaded_image.name
+
+            # Build patient-friendly assessment
+            result["assessment"] = build_assessment(result)
 
             # Save prediction in database
             prediction = save_prediction(

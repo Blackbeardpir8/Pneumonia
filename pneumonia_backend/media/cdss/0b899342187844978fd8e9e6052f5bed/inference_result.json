@@ -1,0 +1,47 @@
+{
+    "image_name": "tmp24ry4wwq.png",
+    "predicted_class": "Normal",
+    "selected_class_probability_percent": 99.92389678955078,
+    "decision_rule": "non_viral_argmax",
+    "class_probabilities_percent": {
+        "Normal": 99.92389678955078,
+        "Viral": 0.010997866280376911,
+        "Bacterial": 0.006832299754023552,
+        "COVID": 0.0582721009850502
+    },
+    "lung_segmentation": {
+        "threshold": 0.3,
+        "mask_area_pixels": 15065,
+        "mask_area_percent_of_224_input": 30.02431441326531,
+        "mask_path": "F:\\Hemlata Thesis\\Code\\pneumonia_backend\\media\\cdss\\0b899342187844978fd8e9e6052f5bed\\lung_mask.png"
+    },
+    "infection_segmentation": {
+        "threshold": 0.5,
+        "mask_area_pixels": 265,
+        "mask_area_percent_of_256_input": 0.40435791015625,
+        "mask_path": "F:\\Hemlata Thesis\\Code\\pneumonia_backend\\media\\cdss\\0b899342187844978fd8e9e6052f5bed\\infection_mask.png",
+        "status": "experimental",
+        "validated_for_non_covid_classes": false
+    },
+    "gradcam": {
+        "target_class": "Normal",
+        "activation_inside_lung_percent": 35.201595306396484,
+        "activation_outside_lung_percent": 64.79840850830078,
+        "overlay_path": "F:\\Hemlata Thesis\\Code\\pneumonia_backend\\media\\cdss\\0b899342187844978fd8e9e6052f5bed\\gradcam_overlay.png"
+    },
+    "visualizations": {
+        "input": "F:\\Hemlata Thesis\\Code\\pneumonia_backend\\media\\cdss\\0b899342187844978fd8e9e6052f5bed\\input_image.png",
+        "lung_overlay": "F:\\Hemlata Thesis\\Code\\pneumonia_backend\\media\\cdss\\0b899342187844978fd8e9e6052f5bed\\lung_overlay.png",
+        "infection_overlay": "F:\\Hemlata Thesis\\Code\\pneumonia_backend\\media\\cdss\\0b899342187844978fd8e9e6052f5bed\\infection_overlay.png",
+        "gradcam_heatmap": "F:\\Hemlata Thesis\\Code\\pneumonia_backend\\media\\cdss\\0b899342187844978fd8e9e6052f5bed\\gradcam_heatmap.png",
+        "combined": "F:\\Hemlata Thesis\\Code\\pneumonia_backend\\media\\cdss\\0b899342187844978fd8e9e6052f5bed\\combined_visualization.png"
+    },
+    "limitations": [
+        "Research prototype; not a standalone clinical diagnosis.",
+        "Classifier probabilities are not guaranteed to be calibrated.",
+        "Grad-CAM is model attribution, not a validated lesion map.",
+        "Infection segmentation was trained using COVID-19 infection annotations.",
+        "Infection mask area is not a clinically validated infection percentage.",
+        "No clinical severity stage is calculated."
+    ]
+}

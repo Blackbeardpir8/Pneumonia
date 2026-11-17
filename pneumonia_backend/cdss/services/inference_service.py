@@ -583,6 +583,24 @@ def run_inference(image_path, output_dir=None):
         probabilities[predicted_index] * 100
     )
 
+    # Raw highest-probability class (ordinary argmax)
+    highest_probability_index = int(
+        np.argmax(probabilities)
+    )
+
+    highest_probability_class = CLASS_NAMES[
+        highest_probability_index
+    ]
+
+    highest_probability_percent = float(
+        probabilities[highest_probability_index] * 100
+    )
+
+    # Check whether the decision rule overrode ordinary argmax
+    decision_rule_overrode_argmax = (
+        predicted_index != highest_probability_index
+    )
+
     # Grad-CAM
     cam, gradcam_probabilities = generate_gradcam(
         gradcam_model,
@@ -644,9 +662,18 @@ def run_inference(image_path, output_dir=None):
     # Structured result
     result = {
         "image_name": image_path.name,
+
+        # Final model decision
         "predicted_class": predicted_class,
         "selected_class_probability_percent": confidence,
+
+        # Raw highest-probability class
+        "highest_probability_class": highest_probability_class,
+        "highest_probability_percent": highest_probability_percent,
+
+        # Decision rule transparency
         "decision_rule": decision_rule,
+        "decision_rule_overrode_argmax": decision_rule_overrode_argmax,
 
         "class_probabilities_percent": {
             name: float(probabilities[index] * 100)

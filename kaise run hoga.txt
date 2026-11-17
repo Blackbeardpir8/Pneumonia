@@ -28,3 +28,16 @@ Body
 - Key: image
 - Change type from Text to File
 - Select a chest X-ray image, preferably covid_1579.png.
+
+
+for backend 
+venv311/Scripts/activate -- activate the enviroment 
+cd pneumonia_backend 
+
+
+then migrate the data base  and models by 
+python manage.py makemigrations and 
+python manage.py migrate 
+
+migrations apply hone k baad 
+python manage.py runserver -- taaki aapna server run kre and usko hum log frontend se connect kre 

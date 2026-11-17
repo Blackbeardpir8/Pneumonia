@@ -57,6 +57,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
+    # Django Template Engine (Django Admin)
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
@@ -67,6 +68,17 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+        },
+    },
+
+    # Jinja2 Template Engine (CDSS Frontend)
+    {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'NAME': 'jinja2',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'environment': 'config.jinja2.environment',
         },
     },
 ]
